@@ -12,7 +12,7 @@ function_sig = { parameter_list ~ "->" ~ identifier }
 
 function_call = { identifier ~ parameter_list }
 
-parameter_list = { "(" ~ ( identifier ~ ":" ~ identifier )* ~ ")" }
+parameter_list = { "(" ~ ( identifier ~ ":" ~ identifier ~ ( "," ~ identifier ~ ":" ~ identifier )*)? ~ ")" }
 
 expression = {
 	( ^"let" ~ identifier ~ ":" ~ identifier? ~ "=" ~ expression )?
@@ -28,3 +28,5 @@ integer = @{ ASCII_DIGIT+ }
 float = @{ ASCII_DIGIT+ ~ "." ~ ASCII_DIGIT* }
 
 string = @{ "\"" ~ ( !("\"") ~ ANY )* ~ "\"" }
+
+WHITESPACE = _{ " " | "\t" | "\r" | "\n" }
