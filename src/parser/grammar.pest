@@ -1,2 +1,30 @@
-function_def = { identifier ~ "(" ~ ")" }
+type_def = {
+	identifier ~ parameter_list ~ (
+		"{" ~ (function_def |  function_dcl) ~ "}"
+	)?
+}
+
+function_def = { identifier ~ function_sig ~ "=" ~ expression }
+
+function_dcl = { identifier ~ function_sig ~ ";" }
+
+function_sig = { parameter_list ~ "->" ~ identifier }
+
+function_call = { identifier ~ parameter_list }
+
+parameter_list = { "(" ~ ( identifier ~ ":" ~ identifier )* ~ ")" }
+
+expression = {
+	( ^"let" ~ identifier ~ ":" ~ identifier? ~ "=" ~ expression )?
+	~ ( function_call | literal | identifier )
+}
+
 identifier = @{ ( ASCII_ALPHA | "_" ) ~ ( ASCII_ALPHANUMERIC | "_" )* }
+
+literal = _{ integer | float | string }
+
+integer = @{ ASCII_DIGIT+ }
+
+float = @{ ASCII_DIGIT+ ~ "." ~ ASCII_DIGIT* }
+
+string = @{ "\"" ~ ( !("\"") ~ ANY )* ~ "\"" }
