@@ -1,5 +1,5 @@
 [package]
-name = "Splisp"
+name = "splisp"
 version = "0.1.0"
 authors = ["Jonas Colve <jonas.colve@outlook.de>"]
 
