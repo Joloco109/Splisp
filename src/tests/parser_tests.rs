@@ -1,16 +1,16 @@
-use parser::SlispParser;
+use parser::SplispParser;
 use parser::Rule;
 
 #[test]
 fn identifier() {
     pest::parses_to! {
-        parser:SlispParser,
+        parser:SplispParser,
         input : "ab6_lq",
         rule : Rule::identifier,
         tokens: [ identifier(0, 6, []) ]
     }
     pest::parses_to! {
-        parser:SlispParser,
+        parser:SplispParser,
         input : "ab(6_lq",
         rule : Rule::identifier,
         tokens: [ identifier(0, 2, []) ]
@@ -20,7 +20,7 @@ fn identifier() {
 #[test]
 fn identifier_fail() {
     pest::fails_with! {
-        parser:SlispParser,
+        parser:SplispParser,
         input : "0ab6_lq",
         rule : Rule::identifier,
         positives: vec![Rule::identifier],
@@ -28,7 +28,7 @@ fn identifier_fail() {
         pos: 0
     }
     pest::fails_with! {
-        parser:SlispParser,
+        parser:SplispParser,
         input : "!ab6_lq",
         rule : Rule::identifier,
         positives: vec![Rule::identifier],
@@ -40,7 +40,7 @@ fn identifier_fail() {
 #[test]
 fn function_dcl() {
     pest::parses_to! {
-        parser:SlispParser,
+        parser:SplispParser,
         input : "func ( x : X, y:Y ) -> Z;",
         rule : Rule::function_dcl,
         tokens: [
