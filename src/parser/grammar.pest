@@ -10,14 +10,15 @@ function_dcl = { identifier ~ function_sig ~ ";" }
 
 function_sig = { parameter_list ~ "->" ~ identifier }
 
-function_call = { identifier ~ parameter_list }
+function_call = { identifier ~ list }
 
 parameter_list = { "(" ~ ( identifier ~ ":" ~ identifier ~ ( "," ~ identifier ~ ":" ~ identifier )*)? ~ ")" }
 
 expression = {
-	( ^"let" ~ identifier ~ ":" ~ identifier? ~ "=" ~ expression )?
-	~ ( function_call | literal | identifier | list )
+	let* ~ ( function_call | literal | identifier | list )
 }
+
+let = { ^"let" ~ identifier ~ ":" ~ identifier? ~ "=" ~ expression ~ ";" }
 
 list = { "(" ~ expression ~ ("," ~ expression)* ~ ")" }
 
