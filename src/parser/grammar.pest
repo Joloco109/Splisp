@@ -8,28 +8,28 @@ function_def = { identifier ~ function_sig ~ "=" ~ expression }
 
 function_dcl = { identifier ~ function_sig ~ ";" }
 
-function_sig = { parameter_list ~ "->" ~ identifier }
+function_sig = { parameter_list ~ ("->" ~ identifier)? }
 
 function_call = { identifier ~ list }
 
 parameter_list = { "(" ~ ( identifier ~ ":" ~ identifier ~ ( "," ~ identifier ~ ":" ~ identifier )*)? ~ ")" }
 
-expression = {
-	let* ~ ( function_call | literal | identifier | list )
+expression = _{
+	let_var* ~ ( function_call | literal | identifier | list )
 }
 
-let = { ^"let" ~ identifier ~ ":" ~ identifier? ~ "=" ~ expression ~ ";" }
+let_var = { ^"let" ~ identifier ~ ":" ~ identifier? ~ "=" ~ expression ~ ";" }
 
-list = { "(" ~ expression ~ ("," ~ expression)* ~ ")" }
+list = { "(" ~ (expression ~ ("," ~ expression)*)? ~ ")" }
 
 identifier = @{ ( ASCII_ALPHA | "_" ) ~ ( ASCII_ALPHANUMERIC | "_" )* }
 
-literal = _{ integer | float | string }
+literal = _{ float | integer | string }
 
 integer = @{ ASCII_DIGIT+ }
 
 float = @{ ASCII_DIGIT+ ~ "." ~ ASCII_DIGIT* }
 
-string = @{ "\"" ~ ( !("\"") ~ ANY )* ~ "\"" }
+string = @{ "\"" ~ ( !( "\\" | "\"") ~ ANY | "\\\\" | "\\\"" )* ~ "\"" }
 
 WHITESPACE = _{ " " | "\t" | "\r" | "\n" }
