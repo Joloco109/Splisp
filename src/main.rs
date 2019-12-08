@@ -7,3 +7,8 @@ pub mod parser;
 fn main() {
     println!("Hello, world!");
 }
+
+#[cfg(test)]
+mod tests {
+    mod parser_tests;
+}
