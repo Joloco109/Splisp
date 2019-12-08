@@ -16,8 +16,10 @@ parameter_list = { "(" ~ ( identifier ~ ":" ~ identifier ~ ( "," ~ identifier ~ 
 
 expression = {
 	( ^"let" ~ identifier ~ ":" ~ identifier? ~ "=" ~ expression )?
-	~ ( function_call | literal | identifier )
+	~ ( function_call | literal | identifier | list )
 }
+
+list = { "(" ~ expression ~ ("," ~ expression)* ~ ")" }
 
 identifier = @{ ( ASCII_ALPHA | "_" ) ~ ( ASCII_ALPHANUMERIC | "_" )* }
 
