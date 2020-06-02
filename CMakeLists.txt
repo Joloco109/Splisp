@@ -12,10 +12,11 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5Core)
-find_package(Boost 1.72.0)
+#find_package(Boost 1.72.0)
 
 add_executable(splisp
   src/main.cpp src/parser.cpp
 )
 
+target_include_directories(splisp PUBLIC src/spirit/include)
 target_link_libraries(splisp Qt5::Core)

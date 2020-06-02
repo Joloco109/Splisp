@@ -1,6 +1,7 @@
 #include <QCommandLineParser>
 
 #include <src/parser.h>
+#include <iostream>
 
 int main(int argc, char *argv[])
 {
@@ -11,8 +12,8 @@ int main(int argc, char *argv[])
     QCommandLineParser parser;
     parser.setApplicationDescription(
                 "\nsplisp reference compiler\n\n"
-                "By Samuel Mahler <mahlersand@gmail.com>\n"
-                "   Jonas Colve <jonas.colve@outlook.de>\n"
+                "By Samuel Mahler     <mahlersand@gmail.com>\n"
+                "   Jonas Colve       <jonas.colve@outlook.de>\n"
                 "   Philipp Rosendahl <philipp.rosendahl@gmx.de>"
     );
     parser.addHelpOption();
@@ -20,9 +21,9 @@ int main(int argc, char *argv[])
 
     parser.addPositionalArgument("file", "file");
 
+    parser.addOption(QCommandLineOption("kraut", "None needed"));
+
     parser.process(app);
 
-
-
-    return app.exec();
+    //return app.exec();
 }

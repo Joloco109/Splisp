@@ -1,0 +1,3 @@
+[submodule "src/spirit"]
+	path = src/spirit
+	url = https://github.com/boostorg/spirit.git

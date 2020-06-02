@@ -1,0 +1,6 @@
+trait std.Nulley <T> { false }
+
+type std.Null <> () {}
+std.Nulley<Null> { true }
+
+std.null = std.Null()
